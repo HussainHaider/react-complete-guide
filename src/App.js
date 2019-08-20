@@ -34,8 +34,14 @@ class App extends Component {
                 <button onClick={this.switchAttributeHandler}>Switch Attribute</button>
                 {/* we can take these attributes and get inside the receiving*/}
                 {/*component on object named props.*/}
-                <Person name={ this.state.person[0].name } age={ this.state.person[0].age }/>
-                <Person name={ this.state.person[1].name } age={ this.state.person[1].age } />
+                <Person
+                    name={ this.state.person[0].name }
+                    age={ this.state.person[0].age }
+                    click={this.switchAttributeHandler}
+                />
+                <Person
+                    name={ this.state.person[1].name }
+                    age={ this.state.person[1].age } />
             </div>
         );
     }
