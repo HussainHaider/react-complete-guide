@@ -10,6 +10,7 @@ const Person = (props) => {
             {/*to get the text/output between the opening and closing tag of our custom component*/}
             {/*react give us a simple props property named children*/}
             <p>{ props.children }</p>
+            <input type="text" onChange={props.change}/>
         </div>
     );
 };
