@@ -14,12 +14,24 @@ class App extends Component {
           {name:'Manu',age:27}
       ]
     };
+
+    switchAttributeHandler = () => {
+        //setState update the virtual DOM which then change the actual DOM.
+        this.setState({
+            person :[
+                {name:'Alexander',age:28},
+                {name:'Manu',age:25}
+            ]
+        })
+    };
+
     render() {
         return (
             <div className="App">
                 <header className="App-header">
                     <h1 className="App-title">Welcome to React</h1>
                 </header>
+                <button onClick={this.switchAttributeHandler}>Switch Attribute</button>
                 {/* we can take these attributes and get inside the receiving*/}
                 {/*component on object named props.*/}
                 <Person name={ this.state.person[0].name } age={ this.state.person[0].age }/>
