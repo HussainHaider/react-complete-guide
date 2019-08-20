@@ -12,7 +12,8 @@ class App extends Component {
       person :[
           {name:'Max',age:28},
           {name:'Manu',age:27}
-      ]
+      ],
+        showPerson: false
     };
 
     switchAttributeHandler = () => {
@@ -25,17 +26,32 @@ class App extends Component {
         })
     };
 
+    onToggleHandler= () => {
+        console.log("State: " + this.state.showPerson);
+        this.setState({showPerson: !this.state.showPerson});
+    };
+
     render() {
+        let persons= null;
+        if(this.state.showPerson) {
+            persons = (
+                <div>
+                    <Person name={ this.state.person[0].name } age={ this.state.person[0].age }/>
+                    <Person name={ this.state.person[1].name } age={ this.state.person[1].age } />
+                </div>
+            );
+        } else {
+            persons = null;
+        }
         return (
             <div className="App">
                 <header className="App-header">
                     <h1 className="App-title">Welcome to React</h1>
                 </header>
-                <button onClick={this.switchAttributeHandler}>Switch Attribute</button>
+                <button onClick={this.onToggleHandler}>Switch Attribute</button>
                 {/* we can take these attributes and get inside the receiving*/}
                 {/*component on object named props.*/}
-                <Person name={ this.state.person[0].name } age={ this.state.person[0].age }/>
-                <Person name={ this.state.person[1].name } age={ this.state.person[1].age } />
+                { persons }
             </div>
         );
     }
