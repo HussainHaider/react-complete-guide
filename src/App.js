@@ -10,7 +10,10 @@ class App extends Component {
         <header className="App-header">
           <h1 className="App-title">Welcome to React</h1>
         </header>
-        <Person />
+        {/* we can take these attributes and get inside the receiving*/}
+        {/*component on object named props.*/}
+        <Person name="Max" age="28"/>
+          <Person name="Manu" age="29">My Hobbies: Racing</Person>
       </div>
     );
   }
