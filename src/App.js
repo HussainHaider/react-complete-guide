@@ -9,7 +9,7 @@ class App extends Component {
     // We cannot do this in the functional component. State is the data of the component.
     // State can change but if it changes it leads  React to re-render the DOM or update the DOM.
     state = {
-        person :[
+        persons :[
             {name:'Max',age:28},
             {name:'Manu',age:27}
         ],
@@ -19,7 +19,7 @@ class App extends Component {
     switchAttributeHandler = () => {
         //setState update the virtual DOM which then change the actual DOM.
         this.setState({
-            person :[
+            persons :[
                 {name:'Alexander',age:28},
                 {name:'Manu',age:25}
             ]
@@ -31,13 +31,23 @@ class App extends Component {
         this.setState({showPerson: !this.state.showPerson});
     };
 
+    deletePersonHandler = (personIndex) => {
+        // we use spreading from es6 bcz we want to copy of persons and not the reference(pointer)
+        const newPerson = [...this.state.persons];
+        newPerson.splice(personIndex,1);
+        this.setState({
+            persons:newPerson
+        })
+    };
+
     render() {
         let persons= null;
         if(this.state.showPerson) {
             persons = (
                 <div>
-                    { this.state.person.map(person=>{
+                    { this.state.persons.map((person,index)=>{
                         return <Person
+                            click={ () => this.deletePersonHandler(index) }
                             name={ person.name }
                             age={ person.age }/>
                     })}
