@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import './App.css';
+import classes from './App.css'; // classes return the object of css classes. this feature when we enable the css module
 // Radium is popular package for react which
 // allows us to use inline styles with pseudo selectors and media query.
-import Radium from 'radium'
+// import Radium from 'radium'
 import Person from './Person/Person'
 
 class App extends Component {
@@ -95,18 +95,18 @@ class App extends Component {
             persons = null;
         }
         // dynamically adding classes
-        const classes =[];
+        const assignedClasses =[];
         if(this.state.persons.length >=2){
-            classes.push('red')
+            assignedClasses.push(classes.red);
         }
         if(this.state.persons.length >=1){
-            classes.push('bold')
+            assignedClasses.push(classes.bold);
         }
         return (
-            <div className="App">
-                <header className="App-header">
-                    <h1 className="App-title">Welcome to React</h1>
-                    <p className={classes.join(' ')}>It really works</p>
+            <div className={classes.App}>
+                <header className={classes.AppHeader}>
+                    <h1 className={classes.AppTitle}>Welcome to React</h1>
+                    <p className={assignedClasses.join(' ')}>It really works</p>
                 </header>
                 <button
                     style={style}
@@ -119,6 +119,6 @@ class App extends Component {
         );
     }
 }
-
-export default Radium(App); // this is higher order component.
+export default App;
+//export default Radium(App); // this is higher order component.
 // Component wrapping your component injecting some extra functionality
