@@ -87,10 +87,19 @@ class App extends Component {
         } else {
             persons = null;
         }
+        // dynamically adding classes
+        const classes =[];
+        if(this.state.persons.length >=2){
+            classes.push('red')
+        }
+        if(this.state.persons.length >=1){
+            classes.push('bold')
+        }
         return (
             <div className="App">
                 <header className="App-header">
                     <h1 className="App-title">Welcome to React</h1>
+                    <p className={classes.join(' ')}>It really works</p>
                 </header>
                 <button
                     style={style}
