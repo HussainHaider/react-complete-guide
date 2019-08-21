@@ -62,18 +62,8 @@ class App extends Component {
     };
 
     render() {
-        const style = {
-            backgroundColor:'Green',
-            border:'1px solid black',
-            color:'white',
-            ':hover' : {
-                backgroundColor: 'lightgreen',
-                color: 'black'
-            },
-            padding:'10px',
-        };
-
         let persons= null;
+        let btnClass = '';
         if(this.state.showPerson) {
             persons = (
                 <div>
@@ -90,7 +80,7 @@ class App extends Component {
                     })}
                 </div>
             );
-            style.backgroundColor = 'Red';
+            btnClass = classes.redBg;
         } else {
             persons = null;
         }
@@ -109,7 +99,7 @@ class App extends Component {
                     <p className={assignedClasses.join(' ')}>It really works</p>
                 </header>
                 <button
-                    style={style}
+                    className={btnClass}
                     onClick={this.onToggleHandler
                     }>Switch Attribute</button>
                 {/* we can take these attributes and get inside the receiving*/}

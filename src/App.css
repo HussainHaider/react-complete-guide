@@ -32,3 +32,17 @@
 .red {
   color: red;
 }
+
+button {
+  background-color:green;
+  border:1px solid black;
+  color:white;
+  padding:10px;
+}
+button:hover{
+  background-color: lightgreen;
+  color: black;
+}
+button.redBg{
+  background-color: red;
+}
