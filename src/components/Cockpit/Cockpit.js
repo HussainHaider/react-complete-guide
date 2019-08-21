@@ -1,8 +1,22 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import classes from "./Cockpit.css";
 
 
 const cockpit = (props) => {
+    // use Effect is the lifecycle hook for the functional component
+    // the function runs every time when the component render so stop this behaviour and run
+    // it only once we use a empty array as a second argument. you can pass the dependence in the second argument
+    useEffect(() => {
+        console.log('[Cockpit.js] useEffect');
+        // Http request...
+        setTimeout(() => {
+            alert('Saved data to cloud!');
+        }, 1000);
+        return () => {
+            console.log('[Cockpit.js] cleanup work in useEffect');
+        };
+    }, []);
+
     // dynamically adding classes
     let btnClass = '';
     if(props.showPerson) {

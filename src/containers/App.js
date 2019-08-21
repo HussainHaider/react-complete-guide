@@ -4,6 +4,11 @@ import Persons from '../components/Persons/Persons'
 import Cockpit from '../components/Cockpit/Cockpit'
 
 class App extends Component {
+    // shouldn't do  HTTP request or storing something in your local storage
+    constructor(props) {
+        super(props);
+        console.log('[App.js] constructor');
+    }
     // state property is inside the component and
     // we can only access it when a class extends from Component class.
     // We cannot do this in the functional component. State is the data of the component.
@@ -15,6 +20,22 @@ class App extends Component {
         ],
         showPerson: false
     };
+    // if you have some scenario where props of your component can change and then
+    // you want to update some internal state of that component, then
+    // this is the hook to use
+    static getDerivedStateFromProps(props, state) {
+        console.log('[App.js] getDerivedStateFromProps', props);
+        return state;
+    }
+
+    componentWillMount() {
+        console.log('[App.js] componentWillMount');
+    }
+    // That is a typical hook you would use for making an HTTP request to
+    // get new data from the web.
+    componentDidMount() {
+        console.log('[App.js] componentDidMount');
+    }
 
     switchAttributeHandler = () => {
         //setState update the virtual DOM which then change the actual DOM.
@@ -59,7 +80,9 @@ class App extends Component {
 
     };
 
+    // After render function Render child components will be rendered
     render() {
+        console.log('[App.js] render');
         let persons= null;
 
         if(this.state.showPerson) {

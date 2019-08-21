@@ -1,16 +1,50 @@
-import React from 'react'
-import Person from "./Person/Person";
+import React, { Component } from 'react';
 
-const persons = (props) => props.persons.map((person,index)=>{
-    return <Person
-        click={ () => props.clicked(index) } // we can also use bind method
-        name={ person.name }
-        age={ person.age}
-        changed={ (event)=> props.changed(event,person.id)}
-        key={ person.id } // The key prop is an important property and we should
-        // add when rendering list of data This key property helps react
-        // update the list efficiently. key should be Unique
-    />
-});
+import Person from './Person/Person';
 
-export default persons
+class Persons extends Component {
+    // static getDerivedStateFromProps(props, state) {
+    //   console.log('[Persons.js] getDerivedStateFromProps');
+    //   return state;
+    // }
+
+    // componentWillReceiveProps(props) {
+    //   console.log('[Persons.js] componentWillReceiveProps', props);
+    // }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        console.log('[Persons.js] shouldComponentUpdate');
+        return true;
+    }
+
+    getSnapshotBeforeUpdate(prevProps, prevState) {
+        console.log('[Persons.js] getSnapshotBeforeUpdate');
+        return { message: 'Snapshot!' };
+    }
+
+    // componentWillUpdate() {
+
+    // }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        console.log('[Persons.js] componentDidUpdate');
+        console.log(snapshot);
+    }
+
+    render() {
+        console.log('[Persons.js] rendering...');
+        return this.props.persons.map((person, index) => {
+            return (
+                <Person
+                    click={() => this.props.clicked(index)}
+                    name={person.name}
+                    age={person.age}
+                    key={person.id}
+                    changed={event => this.props.changed(event, person.id)}
+                />
+            );
+        });
+    }
+}
+
+export default Persons;
