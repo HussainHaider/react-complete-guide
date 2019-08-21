@@ -2,6 +2,10 @@
 import React from 'react';
 
 const Person = (props) => {
+    const rnd = Math.random();
+    if (rnd > 0.7){
+        throw new Error('Something went Wrong!');
+    }
     // {} use to output the dynamic data.
     // Also in class component we have to use this.props to access the attributes
     return (
