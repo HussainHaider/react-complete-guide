@@ -10,8 +10,8 @@ class App extends Component {
     // State can change but if it changes it leads  React to re-render the DOM or update the DOM.
     state = {
         persons :[
-            {name:'Max',age:28},
-            {name:'Manu',age:27}
+            {id:'1',name:'Max',age:28},
+            {id:'2',name:'Manu',age:27}
         ],
         showPerson: false
     };
@@ -20,8 +20,8 @@ class App extends Component {
         //setState update the virtual DOM which then change the actual DOM.
         this.setState({
             persons :[
-                {name:'Alexander',age:28},
-                {name:'Manu',age:25}
+                {id:'1',name:'Alexander',age:28},
+                {id:'2',name:'Manu',age:25}
             ]
         })
     };
@@ -47,9 +47,13 @@ class App extends Component {
                 <div>
                     { this.state.persons.map((person,index)=>{
                         return <Person
-                            click={ () => this.deletePersonHandler(index) }
+                            click={ () => this.deletePersonHandler(index) } // we can also use bind method
                             name={ person.name }
-                            age={ person.age }/>
+                            age={ person.age}
+                            key={ person.id } // The key prop is an important property and we should
+                            // add when rendering list of data This key property helps react
+                            // update the list efficiently. key should be Unique
+                        />
                     })}
                 </div>
             );
