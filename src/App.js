@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+// Radium is popular package for react which
+// allows us to use inline styles with pseudo selectors and media query.
+import Radium from 'radium'
 import Person from './Person/Person'
 
 class App extends Component {
@@ -63,7 +65,12 @@ class App extends Component {
         const style = {
             backgroundColor:'Green',
             border:'1px solid black',
-            color:'white'
+            color:'white',
+            ':hover' : {
+                backgroundColor: 'lightgreen',
+                color: 'black'
+            },
+            padding:'10px',
         };
 
         let persons= null;
@@ -113,4 +120,5 @@ class App extends Component {
     }
 }
 
-export default App;
+export default Radium(App); // this is higher order component.
+// Component wrapping your component injecting some extra functionality
