@@ -24,10 +24,10 @@ const cockpit = (props) => {
     }
 
     const assignedClasses =[];
-    if(props.persons.length >=2){
+    if(props.personsLength >=2){
         assignedClasses.push(classes.red);
     }
-    if(props.persons.length >=1){
+    if(props.personsLength >=1){
         assignedClasses.push(classes.bold);
     }
     return (
@@ -40,4 +40,7 @@ const cockpit = (props) => {
         </div>
     );
 }
-export default cockpit;
+export default React.memo(cockpit);
+// wrap the component with react.memo.It basically uses memoization which is a technique where React
+// will memoize,store a snapshot of the component and only if its input changes,it will re-render it
+// otherwise if its inputs do not change React will give back that stored component.
