@@ -40,6 +40,25 @@ class App extends Component {
         })
     };
 
+    nameChangeHandler = (event,id) => {
+        // findIndex takes a function and iterate on array similar like map function.
+        const personID =this.state.persons.findIndex(p=>{
+            return p.id === id;
+        });
+
+        // we don't copy directly bcz it give the reference and we need copy of obj
+        const person = {...this.state.persons[personID]};
+        person.name = event.target.value;
+
+        const persons = [...this.state.persons];
+        persons[personID] = person;
+
+        this.setState({
+            persons: persons
+        });
+
+    };
+
     render() {
         let persons= null;
         if(this.state.showPerson) {
@@ -50,6 +69,7 @@ class App extends Component {
                             click={ () => this.deletePersonHandler(index) } // we can also use bind method
                             name={ person.name }
                             age={ person.age}
+                            changed={ (event)=> this.nameChangeHandler(event,person.id)}
                             key={ person.id } // The key prop is an important property and we should
                             // add when rendering list of data This key property helps react
                             // update the list efficiently. key should be Unique
