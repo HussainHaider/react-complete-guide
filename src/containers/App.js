@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import classes from './App.css'; // classes return the object of css classes. this feature when we enable the css module
-import Person from '../components/Persons/Person/Person'
+import Persons from '../components/Persons/Persons'
+import Cockpit from '../components/Cockpit/Cockpit'
 
 class App extends Component {
     // state property is inside the component and
@@ -60,47 +61,27 @@ class App extends Component {
 
     render() {
         let persons= null;
-        let btnClass = '';
+
         if(this.state.showPerson) {
             persons = (
-                <div>
-                    { this.state.persons.map((person,index)=>{
-                        return <Person
-                            click={ () => this.deletePersonHandler(index) } // we can also use bind method
-                            name={ person.name }
-                            age={ person.age}
-                            changed={ (event)=> this.nameChangeHandler(event,person.id)}
-                            key={ person.id } // The key prop is an important property and we should
-                            // add when rendering list of data This key property helps react
-                            // update the list efficiently. key should be Unique
-                        />
-                    })}
-                </div>
+                <Persons
+                    persons={this.state.persons}
+                    clicked={this.deletePersonHandler}
+                    changed={this.nameChangeHandler}
+                />
             );
-            btnClass = classes.redBg;
+
         } else {
             persons = null;
         }
-        // dynamically adding classes
-        const assignedClasses =[];
-        if(this.state.persons.length >=2){
-            assignedClasses.push(classes.red);
-        }
-        if(this.state.persons.length >=1){
-            assignedClasses.push(classes.bold);
-        }
+
         return (
             <div className={classes.App}>
-                <header className={classes.AppHeader}>
-                    <h1 className={classes.AppTitle}>Welcome to React</h1>
-                    <p className={assignedClasses.join(' ')}>It really works</p>
-                </header>
-                <button
-                    className={btnClass}
-                    onClick={this.onToggleHandler
-                    }>Switch Attribute</button>
-                {/* we can take these attributes and get inside the receiving*/}
-                {/*component on object named props.*/}
+                <Cockpit
+                    showPerson={this.state.showPerson}
+                    persons={this.state.persons}
+                    clicked={this.onToggleHandler}
+                />
                 { persons }
             </div>
         );
