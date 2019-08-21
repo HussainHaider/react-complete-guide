@@ -9,33 +9,96 @@ class App extends Component {
     // We cannot do this in the functional component. State is the data of the component.
     // State can change but if it changes it leads  React to re-render the DOM or update the DOM.
     state = {
-      person :[
-          {name:'Max',age:28},
-          {name:'Manu',age:27}
-      ]
+        persons :[
+            {id:'1',name:'Max',age:28},
+            {id:'2',name:'Manu',age:27}
+        ],
+        showPerson: false
     };
 
     switchAttributeHandler = () => {
         //setState update the virtual DOM which then change the actual DOM.
         this.setState({
-            person :[
-                {name:'Alexander',age:28},
-                {name:'Manu',age:25}
+            persons :[
+                {id:'1',name:'Alexander',age:28},
+                {id:'2',name:'Manu',age:25}
             ]
         })
     };
 
+    onToggleHandler= () => {
+        console.log("State: " + this.state.showPerson);
+        this.setState({showPerson: !this.state.showPerson});
+    };
+
+    deletePersonHandler = (personIndex) => {
+        // we use spreading from es6 bcz we want to copy of persons and not the reference(pointer)
+        const newPerson = [...this.state.persons];
+        newPerson.splice(personIndex,1);
+        this.setState({
+            persons:newPerson
+        })
+    };
+
+    nameChangeHandler = (event,id) => {
+        // findIndex takes a function and iterate on array similar like map function.
+        const personID =this.state.persons.findIndex(p=>{
+            return p.id === id;
+        });
+
+        // we don't copy directly bcz it give the reference and we need copy of obj
+        const person = {...this.state.persons[personID]};
+        person.name = event.target.value;
+
+        const persons = [...this.state.persons];
+        persons[personID] = person;
+
+        this.setState({
+            persons: persons
+        });
+
+    };
+
     render() {
+        const style = {
+            backgroundColor:'Green',
+            border:'1px solid black',
+            color:'white'
+        };
+
+        let persons= null;
+        if(this.state.showPerson) {
+            persons = (
+                <div>
+                    { this.state.persons.map((person,index)=>{
+                        return <Person
+                            click={ () => this.deletePersonHandler(index) } // we can also use bind method
+                            name={ person.name }
+                            age={ person.age}
+                            changed={ (event)=> this.nameChangeHandler(event,person.id)}
+                            key={ person.id } // The key prop is an important property and we should
+                            // add when rendering list of data This key property helps react
+                            // update the list efficiently. key should be Unique
+                        />
+                    })}
+                </div>
+            );
+            style.backgroundColor = 'Red';
+        } else {
+            persons = null;
+        }
         return (
             <div className="App">
                 <header className="App-header">
                     <h1 className="App-title">Welcome to React</h1>
                 </header>
-                <button onClick={this.switchAttributeHandler}>Switch Attribute</button>
+                <button
+                    style={style}
+                    onClick={this.onToggleHandler
+                    }>Switch Attribute</button>
                 {/* we can take these attributes and get inside the receiving*/}
                 {/*component on object named props.*/}
-                <Person name={ this.state.person[0].name } age={ this.state.person[0].age }/>
-                <Person name={ this.state.person[1].name } age={ this.state.person[1].age } />
+                { persons }
             </div>
         );
     }
