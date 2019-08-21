@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import classes from './App.css'; // classes return the object of css classes. this feature when we enable the css module
-import Person from './Person/Person'
+import Person from '../components/Persons/Person/Person'
 
 class App extends Component {
     // state property is inside the component and
