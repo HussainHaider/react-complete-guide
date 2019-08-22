@@ -2,6 +2,7 @@ import React, { Component,Fragment } from 'react';
 import classes from './App.css'; // classes return the object of css classes. this feature when we enable the css module
 import Persons from '../components/Persons/Persons'
 import Cockpit from '../components/Cockpit/Cockpit'
+import WithClass from '../hoc/WithClass'
 
 class App extends Component {
     // shouldn't do  HTTP request or storing something in your local storage
@@ -101,14 +102,14 @@ class App extends Component {
         return (
             // Fragment is a wrapping component that does not render any HTML code but it fulfill the
             // React requirements.
-            <Fragment>
+            <WithClass classes={classes.App}>
                 <Cockpit
-                    showPerson={this.state.showPerson}
+                    showPeFragmentrson={this.state.showPerson}
                     personsLength={this.state.persons.length}
                     clicked={this.onToggleHandler}
                 />
                 { persons }
-            </Fragment>
+            </WithClass>
         );
     }
 }
