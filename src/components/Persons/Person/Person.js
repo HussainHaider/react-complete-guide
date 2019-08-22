@@ -1,5 +1,6 @@
 import React from 'react';
 import './Person.css'
+import PropTypes from 'prop-types'
 
 const Person = (props) => {
     // {} use to output the dynamic data.
@@ -14,5 +15,18 @@ const Person = (props) => {
             <button onClick={props.click}>Click me!!</button>
         </div>
     );
+};
+// We can actually improve the props logic,like throw an error
+// or a warning if you try to pass in incorrect props.
+// If you work in a large team where work is divided then in such
+// situations people start using your component incorrectly because
+// they don't know that age should be a number.So it can help if
+// you provide some instructions on which props these components
+// accepts and which type of prop each prop should be.We can do it using Prop-types
+Person.propTypes = {
+    click: PropTypes.func,
+    name: PropTypes.string,
+    age: PropTypes.number,
+    changed: PropTypes.func
 };
 export default Person;
