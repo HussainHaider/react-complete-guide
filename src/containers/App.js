@@ -19,7 +19,8 @@ class App extends Component {
             {id:'1',name:'Max',age:28},
             {id:'2',name:'Manu',age:27}
         ],
-        showPerson: false
+        showPerson: false,
+        changeCounter:0
     };
     // if you have some scenario where props of your component can change and then
     // you want to update some internal state of that component, then
@@ -75,8 +76,13 @@ class App extends Component {
         const persons = [...this.state.persons];
         persons[personID] = person;
 
-        this.setState({
-            persons: persons
+        this.setState((prevState,props) => {
+           return {
+               persons: persons,
+               // when we have to update the state that depends on the previous State then this
+               // approach is recommended.
+               changeCounter: prevState.changeCounter + 1
+           };
         });
 
     };
