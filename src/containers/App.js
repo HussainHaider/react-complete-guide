@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component,Fragment } from 'react';
 import classes from './App.css'; // classes return the object of css classes. this feature when we enable the css module
 import Persons from '../components/Persons/Persons'
 import Cockpit from '../components/Cockpit/Cockpit'
@@ -99,14 +99,16 @@ class App extends Component {
         }
 
         return (
-            <div className={classes.App}>
+            // Fragment is a wrapping component that does not render any HTML code but it fulfill the
+            // React requirements.
+            <Fragment>
                 <Cockpit
                     showPerson={this.state.showPerson}
                     personsLength={this.state.persons.length}
                     clicked={this.onToggleHandler}
                 />
                 { persons }
-            </div>
+            </Fragment>
         );
     }
 }
